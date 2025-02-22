@@ -1,0 +1,45 @@
+@use 'sass:list';
+
+$wrapper-width: 90%;
+$max-wrapper-width: 1536px;
+$item-width: 56px;
+$item-height: 100px;
+$item-duration: 35s;
+
+.infinite-wrapper {
+  width: $wrapper-width;
+  max-width: $max-wrapper-width;
+  margin-inline: auto;
+  position: relative;
+  height: $item-height;
+  margin-top: 5rem;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0)
+  );
+
+  img {
+    position: absolute;
+    left: max(calc(#{$item-width} * 7), 100%);
+    animation-name: scrollLeft;
+    animation-duration: $item-duration;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes scrollLeft {
+    to {
+      left: -#{$item-width};
+    }
+  }
+
+  @for $i from 1 to 7 {
+    .item-#{$i} {
+      animation-delay: calc(#{$item-duration} / 7 * (7 - #{$i}) * -1);
+    }
+  }
+}

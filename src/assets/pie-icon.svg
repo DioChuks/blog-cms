@@ -1,0 +1,9 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon">
+<rect id="Rectangle" width="40" height="40" rx="6" fill="#FDF7F0"/>
+<g id="Icon_2">
+<path id="Path" d="M29.2109 22.89C27.4608 27.0289 23.1648 29.492 18.7087 28.9115C14.2527 28.331 10.7311 24.8494 10.0997 20.4003C9.46836 15.9512 11.8823 11.6273 16.0009 9.83" stroke="#FF8700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path_2" fill-rule="evenodd" clip-rule="evenodd" d="M30.001 19C30.001 16.3478 28.9474 13.8043 27.072 11.9289C25.1967 10.0536 22.6531 9 20.001 9V19H30.001Z" stroke="#FF8700" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

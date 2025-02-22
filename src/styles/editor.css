@@ -1,0 +1,48 @@
+.ProseMirror {
+    min-height: 200px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .ProseMirror:focus {
+    outline: none;
+    border-color: #94a3b8;
+  }
+  
+  .ProseMirror img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+  }
+  
+  .ProseMirror button {
+    padding: 0.5rem 1rem;
+    background-color: #10b981;
+    color: white;
+    border-radius: 0.375rem;
+    font-weight: 500;
+  }
+  
+  .ProseMirror button:hover {
+    background-color: #059669;
+  }
+    
+
+  /* width */
+  .scroll-bar::-webkit-scrollbar {
+      width: 3px; 
+  }
+  
+  /* Track */
+  .scroll-bar::-webkit-scrollbar-track {
+      background: #ccc;
+      border-radius: 5px;
+  }
+  
+  /* Handle */
+  .scroll-bar::-webkit-scrollbar-thumb {
+      background: rgb(198, 208, 208);
+      border-radius: 24px;
+  }
+  

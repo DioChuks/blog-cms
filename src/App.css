@@ -1,0 +1,202 @@
+@keyframes appear {
+  from {
+    opacity: 0.5;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes appearFromLeft {
+  from {
+    opacity: 0.5;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes appearFromLeftAlt {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-appear {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+.animate-appear-left {
+  animation: appearFromLeft linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+.animate-appear-left-alt {
+  animation: appearFromLeftAlt linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+.animate-appearFromLeft {
+  animation: appearFromLeft 2s linear forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 2s linear;
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-right {
+  @apply opacity-0;
+  animation: fadeInRight 1s ease-out forwards;
+}
+
+.animate-appear-right {
+  animation: fadeInRight linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-left {
+  @apply opacity-0;
+  animation: fadeInLeft 1s ease-out forwards;
+}
+
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+.fade-out-left {
+  @apply opacity-0;
+  animation: fadeOutLeft 1s ease-out forwards;
+}
+
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-bottom {
+  @apply opacity-0;
+  animation: fadeInBottom 1s ease-out forwards;
+}
+
+.animate-appear-bottom {
+  animation: fadeInBottom linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes scaleFadeInTop {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-appearTop {
+  @apply opacity-0;
+  animation: scaleFadeInTop 1s ease-out forwards;
+}
+
+/* .hero-section {
+  background-image: url(assets/ilustration-wrapper.png);
+  background-position: right;
+  background-repeat: no-repeat;
+  @media screen and (max-width: 768px) {
+    background-position: top right;
+  }
+  @media screen and (min-width: 1400px) {
+    background-size: 40%;
+  }
+} */
+
+.founders-box > div {
+  transition: all 300ms ease-in-out;
+}
+
+.founders-box > div:hover {
+  transform: translateY(-10px);
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.testimony-img {
+  background-image: url(assets/testimony1.png);
+  background-repeat: no-repeat;
+}
+
+.ceo-img {
+  background-image: url(assets/ceo.png);
+  background-repeat: no-repeat;
+}
+
+.card {
+  padding: 1rem;
+}
+
+.second-section {
+  background-image: url(assets/wavy1.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
