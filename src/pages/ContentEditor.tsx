@@ -18,6 +18,7 @@ import type { EditorContent as ContentType } from "@/lib/types";
 import { MetaContent } from "@/components/MetaContent";
 import { CreateContent } from "@/components/CreateContent";
 import PublishPostModal from "@/components/modals/PublishPost";
+import { extractThumbnailAndSlug } from "@/lib/utils";
 
 const STORAGE_KEY = "editor-content";
 
@@ -26,7 +27,8 @@ export default function ContentEditor() {
   const [phonePreview, setPhonePreview] = useState(true);
   const [editorContent, setEditorContent] = useState("");
   const [step, setStep] = useState(1);
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState<string | null>(null);
+  const [slug, setSlug] = useState<string | null>(null);
   const [publishModal, setPublishModal] = useState(false);
 
   const editor = useEditor({
@@ -100,7 +102,16 @@ export default function ContentEditor() {
   const renderStep = useMemo(() => {
     switch (step) {
       case 2:
-        return <MetaContent thumbnail={thumbnail} prevStep={prevStep} />;
+        const data = { thumbnail, slug };
+        console.log(data);
+        return (
+          <MetaContent
+            data={data}
+            prevStep={prevStep}
+            setThumbnailState={setThumbnail}
+            setSlugState={setSlug}
+          />
+        );
       default:
         return (
           <CreateContent
@@ -111,7 +122,18 @@ export default function ContentEditor() {
           />
         );
     }
-  }, [step, editor, phonePreview, setPhonePreview]);
+  }, [step, editor, editorContent, phonePreview, setPhonePreview]);
+
+  useEffect(() => {
+    // Example of how you might fetch the content from localStorage (or update it dynamically)
+    const savedContent = localStorage.getItem("editor-content");
+    if (savedContent) {
+      setEditorContent(savedContent);
+      const { thumbnail, slug } = extractThumbnailAndSlug(savedContent);
+      setThumbnail(thumbnail);
+      setSlug(slug);
+    }
+  }, []); // Runs once on mount
 
   // Load saved content on mount
   useEffect(() => {
@@ -121,6 +143,7 @@ export default function ContentEditor() {
       const { content } = JSON.parse(saved) as ContentType;
       if (editor.getHTML() !== content) {
         setEditorContent(content);
+        // console.log(content);
         editor.commands.setContent(content);
       }
     }
@@ -200,12 +223,12 @@ export default function ContentEditor() {
         </div>
       </header>
 
-      <div className="md:px-[5%] max-h-screen w-full fixed left-0 overflow-auto bg-[#f8f8f8]">{renderStep}</div>
+      <div className="md:px-[5%] max-h-screen w-full fixed left-0 overflow-auto bg-[#f8f8f8]">
+        {renderStep}
+      </div>
 
       {/* Publish content modal */}
-      {publishModal && (
-        <PublishPostModal setPublishModal={setPublishModal} />
-      )}
+      {publishModal && <PublishPostModal setPublishModal={setPublishModal} />}
     </div>
   );
 }

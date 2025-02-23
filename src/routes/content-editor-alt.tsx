@@ -63,12 +63,11 @@ const STORAGE_KEY = "editor-content";
 
 export default function CreateContentRouteTwo() {
   const [content, setContent] = useState(DEFAULT);
-  const [isMounted, setIsMounted] = useState(false);
+//   const [isMounted, setIsMounted] = useState(false);
   const [phonePreview, setPhonePreview] = useState(true);
-  const [editorContent, setEditorContent] = useState("");
+//   const [editorContent, setEditorContent] = useState("");
   const [step, setStep] = useState(1);
-  const [thumbnail, setThumbnail] = useState("");
-  const [publishModal, setPublishModal] = useState(false);
+//   const [publishModal, setPublishModal] = useState(false);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -97,7 +96,7 @@ export default function CreateContentRouteTwo() {
     onUpdate: ({ editor }) => {
       // Save to local storage on every change
       const content = editor.getHTML();
-      setEditorContent(content); // Update content state for preview
+    //   setEditorContent(content); // Update content state for preview
       const saveData: ContentType = {
         content,
         timestamp: Date.now(),
@@ -116,7 +115,7 @@ export default function CreateContentRouteTwo() {
   // handle next step
   const nextStep = () => {
     if (step === 2) {
-      setPublishModal(true);
+    //   setPublishModal(true);
       return;
     }
     setPhonePreview(false);
@@ -124,12 +123,12 @@ export default function CreateContentRouteTwo() {
   };
 
   // handle previous step
-  const prevStep = () => {
-    if (step === 1) {
-      return;
-    }
-    setStep(step - 1);
-  };
+//   const prevStep = () => {
+//     if (step === 1) {
+//       return;
+//     }
+//     setStep(step - 1);
+//   };
 
   const onChangeContent = (value: any) => {
     setContent(value);

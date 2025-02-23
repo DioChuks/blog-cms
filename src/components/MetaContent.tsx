@@ -8,13 +8,39 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ArrowLeft, XCircle } from "lucide-react";
+import { Textarea } from "./ui/textarea";
 
 interface MetaContentProps {
-  thumbnail: string;
+  data: {
+    thumbnail: string | null;
+    slug: string | null;
+  } | null;
   prevStep: () => void;
+  setThumbnailState: React.Dispatch<React.SetStateAction<string | null>>;
+  setSlugState: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export function MetaContent({ thumbnail, prevStep }: MetaContentProps) {
+export function MetaContent({
+  data,
+  prevStep,
+  setThumbnailState,
+  setSlugState,
+}: MetaContentProps) {
+  const handleThumbnail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setThumbnailState(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSlug = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSlugState(e.target.value);
+  };
+
   return (
     <section className="p-8 bg-[#f8f8f8]">
       <span
@@ -42,17 +68,18 @@ export function MetaContent({ thumbnail, prevStep }: MetaContentProps) {
                 Thumbnail{" "}
               </label>
 
-              {!thumbnail ? (
+              {!data?.thumbnail ? (
                 <input
                   type="file"
                   id="thumbNail"
-                  placeholder="flea@rhcp.com"
+                  placeholder="Enter thumbnail"
+                  onChange={handleThumbnail}
                   className="w-full h-[126px] bg-white rounded-md border border-[#5C6E9A] shadow-xs sm:text-sm"
                 />
               ) : (
                 <img
-                  src={thumbnail}
-                  alt="thumbnail"
+                  src={data.thumbnail}
+                  alt="thumbnail-img"
                   className="w-full h-[126px] bg-cover bg-no-repeat rounded-md border border-[#5C6E9A] shadow-xs sm:text-sm"
                 />
               )}
@@ -65,7 +92,7 @@ export function MetaContent({ thumbnail, prevStep }: MetaContentProps) {
               Metadata
             </label>
             <div className="space-y-2">
-              <p>
+              <div>
                 <input
                   type="text"
                   id="metaTitle"
@@ -76,24 +103,24 @@ export function MetaContent({ thumbnail, prevStep }: MetaContentProps) {
                 <p className="text-right text-xs font-medium text-[#5C6E9A] mt-1">
                   0/60
                 </p>
-              </p>
+              </div>
 
-              <p>
-                <input
-                  type="text"
-                  id="metaDescription"
+              <div>
+                <Textarea
                   placeholder="Meta Description"
+                  className="h-[109px] bg-white border-[#5C6E9A]"
                   maxLength={160}
-                  className="w-full h-[109px] rounded-md border border-[#5C6E9A] px-4 shadow-xs sm:text-sm"
                 />
                 <p className="text-right text-xs font-medium text-[#5C6E9A] mt-1">
                   0/160
                 </p>
-              </p>
+              </div>
 
               <input
                 type="text"
-                id="metaKeywords"
+                id="metaSlugUrl"
+                value={`https://zeus.silfrica.com/blog/${data?.slug}`}
+                onChange={handleSlug}
                 placeholder="https://zeuus.silfrica.com/blog/why-traditional-marketing-ads-fail-to-reach-campuses"
                 className="w-full h-[52px] rounded-md border border-[#5C6E9A] px-4 shadow-xs sm:text-sm"
               />
@@ -118,12 +145,10 @@ export function MetaContent({ thumbnail, prevStep }: MetaContentProps) {
                 </SelectContent>
               </Select>
 
-              <input
-                type="text"
-                id="tags"
+              <Textarea
                 placeholder="Tags"
+                className="h-[109px] bg-white border-[#5C6E9A]"
                 maxLength={160}
-                className="w-full h-[109px] rounded-md border border-[#5C6E9A] px-4 shadow-xs sm:text-sm"
               />
             </div>
           </div>
