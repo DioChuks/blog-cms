@@ -4,9 +4,10 @@ import { X } from 'lucide-react';
 
 interface PublishPostModalProps {
     setPublishModal: React.Dispatch<React.SetStateAction<boolean>>;
+    publishContent: () => void;
 }
 
-const PublishPostModal: React.FC<PublishPostModalProps> = ({ setPublishModal }) => {
+const PublishPostModal: React.FC<PublishPostModalProps> = ({ setPublishModal, publishContent }) => {
   return (
     <div className="w-full h-full bg-black/50 flex justify-center items-center absolute inset-0 z-50">
           <div className="bg-white p-8 rounded-md">
@@ -29,7 +30,7 @@ const PublishPostModal: React.FC<PublishPostModalProps> = ({ setPublishModal }) 
                 <Button variant="ghost" onClick={() => setPublishModal(false)}>
                   Cancel
                 </Button>
-                <Button className="bg-emerald-400 hover:bg-emerald-500">
+                <Button className="bg-emerald-400 hover:bg-emerald-500" onClick={publishContent}>
                   Confirm
                 </Button>
               </div>

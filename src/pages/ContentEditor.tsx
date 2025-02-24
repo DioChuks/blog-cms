@@ -14,10 +14,9 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Undo2, Redo2, X, Smartphone } from "lucide-react";
-import type { EditorContent as ContentType } from "@/lib/types";
+import type { EditorContent as ContentType, MetaPayload } from "@/lib/types";
 import { MetaContent } from "@/components/MetaContent";
 import { CreateContent } from "@/components/CreateContent";
-import PublishPostModal from "@/components/modals/PublishPost";
 import { extractThumbnailAndSlug } from "@/lib/utils";
 
 const STORAGE_KEY = "editor-content";
@@ -27,8 +26,8 @@ export default function ContentEditor() {
   const [phonePreview, setPhonePreview] = useState(true);
   const [editorContent, setEditorContent] = useState("");
   const [step, setStep] = useState(1);
-  const [thumbnail, setThumbnail] = useState<string | null>(null);
-  const [slug, setSlug] = useState<string | null>(null);
+  const [extractedThumbnail, setExtractedThumbnail] = useState<string | null>(null);
+  const [extractedSlug, setExtractedSlug] = useState<string | null>(null);
   const [publishModal, setPublishModal] = useState(false);
 
   const editor = useEditor({
@@ -98,18 +97,31 @@ export default function ContentEditor() {
     setStep(step - 1);
   };
 
+  const processPublish = (payload: MetaPayload) => {
+    // process publish here
+    console.log("Publishing content...");
+    console.log(payload);
+
+    // add content to the payload
+    const data = { ...payload, content: editorContent };
+    console.log(data);
+
+    // send to api
+  };
+
   // switch case to render different step in creating content
   const renderStep = useMemo(() => {
     switch (step) {
       case 2:
-        const data = { thumbnail, slug };
+        let data = { thumbnail: extractedThumbnail, slug: extractedSlug };
         console.log(data);
         return (
           <MetaContent
             data={data}
             prevStep={prevStep}
-            setThumbnailState={setThumbnail}
-            setSlugState={setSlug}
+            isPublishedModal={publishModal}
+            setIsPublishedModal={setPublishModal}
+            handleMetaData={(metaPayload) => processPublish(metaPayload)}
           />
         );
       default:
@@ -122,7 +134,7 @@ export default function ContentEditor() {
           />
         );
     }
-  }, [step, editor, editorContent, phonePreview, setPhonePreview]);
+  }, [step, editor, publishModal, editorContent, phonePreview, setPhonePreview]);
 
   useEffect(() => {
     // Example of how you might fetch the content from localStorage (or update it dynamically)
@@ -130,8 +142,8 @@ export default function ContentEditor() {
     if (savedContent) {
       setEditorContent(savedContent);
       const { thumbnail, slug } = extractThumbnailAndSlug(savedContent);
-      setThumbnail(thumbnail);
-      setSlug(slug);
+      setExtractedThumbnail(thumbnail);
+      setExtractedSlug(slug);
     }
   }, []); // Runs once on mount
 
@@ -226,9 +238,6 @@ export default function ContentEditor() {
       <div className="md:px-[5%] max-h-screen w-full fixed left-0 overflow-auto bg-[#f8f8f8]">
         {renderStep}
       </div>
-
-      {/* Publish content modal */}
-      {publishModal && <PublishPostModal setPublishModal={setPublishModal} />}
     </div>
   );
 }
