@@ -82,7 +82,7 @@ const Dashboard: FC = () => {
             </p>
           </div>
         </div>
-        <div className="w-full max-h-[1028px] overflow-y-scroll p-6">
+        <div className="w-full max-h-[1028px] overflow-y-scroll px-12 py-6">
           <Outlet />
         </div>
       </section>

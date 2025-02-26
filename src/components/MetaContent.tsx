@@ -10,9 +10,9 @@ import {
 import { ArrowLeft, XCircle } from "lucide-react";
 import { Textarea } from "./ui/textarea";
 import React, { useState } from "react";
-import PublishPostModal from "./modals/PublishPost";
 import { MetaPayload } from "@/lib/types";
 import { createPortal } from "react-dom";
+import PromptModal from "./modals/PromptModal";
 
 interface MetaContentProps {
   data: {
@@ -175,7 +175,7 @@ export function MetaContent({
                 />
               )}
 
-              <XCircle className="pointer-events-none absolute right-1 top-1 text-gray-300" />
+              <XCircle className="absolute right-1 top-1 text-gray-300 hover:text-red-600 hover:drop-shadow-md z-10 cursor-pointer" />
             </div>
           </div>
           <div className="space-y-1">
@@ -219,7 +219,7 @@ export function MetaContent({
                   type="text"
                   id="metaSlugUrl"
                   value={slug ?? ""}
-                  readOnly={slug !== null && slug.length < 0}
+                  readOnly={slug !== null && slug.length > 1}
                   onChange={handleSlug}
                   placeholder="your-post-slug"
                   className="w-full h-[52px] rounded-md border border-[#5C6E9A] pl-[270px] pr-4 shadow-xs sm:text-sm"
@@ -288,9 +288,12 @@ export function MetaContent({
       {/* Publish content modal */}
       {isPublishedModal &&
         createPortal(
-          <PublishPostModal
-            setPublishModal={setIsPublishedModal}
-            publishContent={handleConfirmPublishContent}
+          <PromptModal
+            title="Publish Content?"
+            description="Ensure content and meta fields are proper and aligned before
+                pushing content live"
+            setPromptModal={setIsPublishedModal}
+            promptConfirmContent={handleConfirmPublishContent}
           />,
           document.body
         )}

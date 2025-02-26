@@ -1,4 +1,5 @@
 import "@/styles/editor.css";
+import "@/styles/content.scss";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
@@ -8,7 +9,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Heading from "@tiptap/extension-heading";
 import FontFamily from "@tiptap/extension-font-family";
 import TextStyle from "@tiptap/extension-text-style";
-import FontSize from "@tiptap/extension-font-size";
+import FontSize from "@tobiasafischer/tiptap-extension-font-size";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -18,6 +19,7 @@ import type { EditorContent as ContentType, MetaPayload } from "@/lib/types";
 import { MetaContent } from "@/components/MetaContent";
 import { CreateContent } from "@/components/CreateContent";
 import { extractThumbnailAndSlug } from "@/lib/utils";
+import ReactComponent from "@/components/buttons/Extension";
 
 const STORAGE_KEY = "editor-content";
 
@@ -33,6 +35,7 @@ export default function ContentEditor() {
   const editor = useEditor({
     extensions: [
       StarterKit,
+      ReactComponent,
       Image.configure({
         allowBase64: true,
         HTMLAttributes: {
@@ -57,6 +60,9 @@ export default function ContentEditor() {
       TextStyle,
       FontSize.configure({
         types: ["textStyle"],
+        defaultFontSize: 16,
+        fontSizeOptions: [12, 14, 16, 18, 20, 24, 28, 32, 36, 40],
+        step: 1,
       }),
     ],
     content: "",
@@ -107,6 +113,10 @@ export default function ContentEditor() {
     console.log(data);
 
     // send to api
+
+    // if response is successful, clear localStorage & redirect to content page
+    localStorage.removeItem(STORAGE_KEY);
+    window.location.href = "/content";
   };
 
   // switch case to render different step in creating content
@@ -235,8 +245,10 @@ export default function ContentEditor() {
         </div>
       </header>
 
-      <div className="md:px-[5%] max-h-screen w-full fixed left-0 overflow-auto bg-[#f8f8f8]">
-        {renderStep}
+      <div className="md:px-[5%] max-h-screen w-full fixed left-0 overflow-auto bg-[#f8f8f8] pb-8">
+        <div className={`${step === 2 ? 'max-w-7xl':'max-w-[768px] md:flex gap-4 items-center justify-center'} mx-auto`}>
+          {renderStep}
+        </div>
       </div>
     </div>
   );
