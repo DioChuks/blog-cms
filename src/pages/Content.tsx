@@ -35,7 +35,7 @@ const Content: FC = () => {
 
   return (
     <section className="min-h-screen relative">
-      <header>
+      <header className="lg:ml-[11%] xl:ml-[14.5%]">
         <Select value={category} onValueChange={handleCategoryChange}>
           <SelectTrigger className="w-48 bg-white">
             <SelectValue placeholder="Category" />
@@ -52,7 +52,7 @@ const Content: FC = () => {
         </Select>
       </header>
       <br />
-      <div className="flex flex-col gap-4">
+      <div className="w-fit mx-auto flex flex-col gap-4">
       {paginatedContent.map((data) => (
           <ContentCard key={data.title} data={data} />
         ))}

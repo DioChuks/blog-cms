@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Logo from "/favicon.svg";
 import { SearchIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
@@ -18,20 +17,8 @@ const DashboardHeader: React.FC = () => {
   
   return (
     <div className="flex justify-center items-center w-full bg-white">
-      <header className="flex justify-between w-full h-14 lg:h-[80px] py-2 lg:py-0 px-4">
-        <div className="my-auto w-fit">
-          <a href="" className="flex items-center gap-1">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="w-6 h-6 lg:w-auto lg:h-auto"
-            />
-            <span className="text-sm font-medium lg:font-bold lg:text-lg">
-              Dashboard
-            </span>
-          </a>
-        </div>
-        <div className={`max-w-[1240px] flex ${isSearchable ? 'justify-between': 'justify-end'} items-center lg:px-2 w-full`}>
+      <header className="flex justify-center w-full max-w-screen-2xl h-14 lg:h-[80px] py-2">
+        <div className={`w-full flex ${isSearchable ? 'justify-between': 'justify-end'} items-center lg:px-2 w-full`}>
           <div className={`${isSearchable ? 'flex' : 'hidden'} items-center gap-1 w-[457px] h-10 bg-[#f8f8f8] rounded-[20px] border px-2`}>
             <SearchIcon size={24} className="text-gray-400" />
             <input

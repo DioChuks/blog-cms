@@ -10,6 +10,7 @@ import Dashboard from "./routes/dashboard";
 import Content from "./pages/Content";
 import CreateContentRoute from "./routes/content-editor";
 import CreateContentRouteTwo from "./routes/content-editor-alt";
+import Settings from "./pages/Settings";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "content",
         element: <Content />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
       },
     ],
   },

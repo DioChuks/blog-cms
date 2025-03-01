@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { ContentCardProps } from "@/lib/types";
 import {
   Popover,
   PopoverContent,
@@ -6,18 +7,6 @@ import {
 } from "@/components/ui/popover";
 import { createPortal } from "react-dom";
 import PromptModal from "../modals/PromptModal";
-
-interface ContentCardProps {
-  data: {
-    title: string;
-    date: string;
-    time: string;
-    category: string;
-    tags: string[];
-    clicks: number;
-    is_hidden: boolean;
-  };
-}
 
 const ContentCard: FC<ContentCardProps> = ({ data }) => {
   const [isDeleteModal, setIsDeleteModal] = useState(false);

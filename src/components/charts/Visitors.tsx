@@ -11,19 +11,25 @@ import {
 } from "recharts";
 
 const data = [
-  { date: "13/6", "Visitors": 271,},
-  { date: "13/6", "Visitors": 242,},
-  { date: "13/6", "Visitors": 258,},
-  { date: "13/6", "Visitors": 266,},
-  { date: "13/6", "Visitors": 240,},
-  { date: "13/6", "Visitors": 189,},
-  { date: "13/6", "Visitors": 49,},
-  { date: "13/6", "Visitors": 80,},
-  { date: "13/6", "Visitors": 150,},
-  { date: "13/6", "Visitors": 50,},
-  { date: "13/6", "Visitors": 6,},
-  { date: "13/6", "Visitors": 20,},
+  { date: "2023/06/12 08:00", "Visitors": 314 },
+  { date: "2023/06/12 09:00", "Visitors": 280 },
+  { date: "2023/06/12 10:00", "Visitors": 290 },
+  { date: "2023/06/12 11:00", "Visitors": 275 },
+  { date: "2023/06/12 12:00", "Visitors": 320 },
+  { date: "2023/06/13 08:00", "Visitors": 230 },
+  { date: "2023/06/13 09:00", "Visitors": 210 },
+  { date: "2023/06/13 10:00", "Visitors": 180 },
+  { date: "2023/06/13 11:00", "Visitors": 200 },
+  { date: "2023/06/13 12:00", "Visitors": 250 },
+  { date: "2023/06/14 08:00", "Visitors": 350 },
+  { date: "2023/06/14 09:00", "Visitors": 330 },
+  { date: "2023/06/14 10:00", "Visitors": 360 },
 ];
+
+let max = Math.max.apply(null,
+  data.map(function (o) { return o.Visitors; }));
+
+max = max + 10;
 
 const VisitorsChart = () => {
   const [period, setPeriod] = useState(7);
@@ -68,17 +74,16 @@ const VisitorsChart = () => {
             tickLine={false}
             tickMargin={10}
             tickSize={10}
-            padding={{ left: 30, right: 30 }}
+            padding={{ left: 0, right: 30 }}
           />
           <YAxis
             type="number"
-            domain={[0.0, 300.0]}
+            domain={[0.0, max]}
             className="text-[10px]"
-            tickCount={6}
+            tickCount={data.length+1}
             tickLine={false}
             tickMargin={10}
             allowDecimals={false}
-            // axisLine={false}
           />
           <CartesianGrid strokeDasharray="3 3" vertical={false} opacity="0.5" />
           <Tooltip />
