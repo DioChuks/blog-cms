@@ -35,6 +35,12 @@ export interface User {
   updated_at: string;
 }
 
+export interface NewUser {
+  name: string;
+  email: string;
+  role: string;
+}
+
 export interface EditorProfile {
   id: number;
   name: string;

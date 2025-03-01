@@ -14,11 +14,11 @@ import Logo from "/favicon.svg";
 const Dashboard: FC = () => {
   return (
     <main className="bg-[#f8f8f8]">
-      <section className="flex justify-between h-[88vh]">
+      <section className="flex justify-between max-h-screen">
         <div className="bg-white hidden lg:flex flex-col items-center min-h-[400px]">
           <aside className="w-[251px] px-4 relative">
             <div className="my-6 w-fit">
-              <a href="" className="flex items-center gap-1">
+              <a href="/dashboard" className="flex items-center gap-1">
                 <img
                   src={Logo}
                   alt="Logo"
@@ -88,13 +88,13 @@ const Dashboard: FC = () => {
             {/* exit icon */}
             <p className="flex items-center gap-1">
               <LogOutIcon className="w-6 h-6 ml-4 text-dark-blue-gray" />
-              <a href="/learnboard" className="text-dark-blue-gray font-normal">
+              <a href="/" className="text-dark-blue-gray font-normal">
                 Log Out
               </a>
             </p>
           </div>
         </div>
-        <section className="w-full max-h-[1028px] overflow-y-scroll">
+        <section className="w-full max-h-screen overflow-y-scroll">
           <DashboardHeader />
           <div className="w-full px-12 py-6">
             <Outlet />
